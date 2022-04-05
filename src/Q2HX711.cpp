@@ -54,5 +54,14 @@ long Q2HX711::read() {
   }
 
   data[2] ^= 0x80;
-  return ((uint32_t) data[2] << 16) | ((uint32_t) data[1] << 8) | (uint32_t) data[0];
+
+  result = ((uint32_t) data[2] << 16) | ((uint32_t) data[1] << 8) | (uint32_t) data[0];
+
+  offsetResult = result - OFFSET;
+
+  return offsetResult;
+}
+
+void Q2HX711::set_offset(byte offset) {
+  OFFSET = offset;
 }
